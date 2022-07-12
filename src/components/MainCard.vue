@@ -2,10 +2,10 @@
     <div class="card-container">
         <!-- cicliamo l'array che  ci arriva tramite la props -->
         <div class="card" v-for="element in userFilm" :key="element.id">
-           <h3 class="">
+           <h3 class="title">
                {{element.title}}
            </h3>
-           <h5>
+           <h5 class="sub-title">
                {{element.original_title}}
            </h5>
             <div>
@@ -13,11 +13,11 @@
               
            </div>
            <div>
-                 <img class="flags" :src="flagsNation(element.original_language)">
+                 <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
                {{element.original_language}}
            </div>
           
-           <div>
+           <div class="vote">
                {{element.vote_average}}
            </div>
         </div>
@@ -38,7 +38,13 @@ export default {
     },
     methods:{
         flagsNation(nationality){
+            if(nationality == 'en'){
+                nationality = 'gb'
+            }else if(nationality == 'ja'){
+                nationality = 'jp'
+            }
             return 'https://countryflagsapi.com/svg/' + nationality
+            
         },
 
         imgCard(photo){
@@ -56,18 +62,23 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .card{
-        width: calc((100% / 6) - 8px);
+        width: calc((100% / 5) - 8px);
         margin: 4px;
-
+        background-color: lightcoral;
+        .title, .sub-title{
+            text-align: center;
+            margin: 5px 2px;
+        }
         .flags{
             width: 20px;
+            margin: 5px 2px;
 
         }
 
         .photo{
-            max-width: 150px;
-            max-height: 150px;
-            overflow-y: hidden;
+            max-width: 300px;
+            max-height: 300px;
+            overflow: hidden;
         }
     }
 }
