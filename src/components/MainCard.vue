@@ -1,4 +1,5 @@
 <template>
+
     <div class="card-container">
         <!-- cicliamo l'array che  ci arriva tramite la props -->
         <div class="card" v-for="element in userFilm" :key="element.id">
@@ -18,10 +19,11 @@
                 <!-- flags -->
                 <div>
                     <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
-                    {{element.original_language}}
+                    <!-- {{element.original_language}} -->
                 </div>
                 <!-- vote -->
-                <div class="vote">
+                <div class="vote" >
+                    <i class="fa-solid fa-star" v-for="star in 5 " :key="star"></i>
                     {{element.vote_average}}
                 </div>
                 
@@ -30,14 +32,15 @@
                 </div>
            </div>
         </div>
+        
     <!-- serie -->
         
-            <div class="card" v-for="element in userSeries" :key="element.id">
-           <!-- img -->
+        <div class="card" v-for="element in userSeries" :key="element.id">
+            <!-- img -->
             <div class="poster">
                 <img class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
-           </div>
-           <div class="element-hover-container flex">
+            </div>
+            <div class="element-hover-container flex">
                  <!-- title -->
                 <h3 class="title">
                    Titolo: {{element.name}}
@@ -49,17 +52,19 @@
                 <!-- flags -->
                 <div>
                     <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
-                    {{element.original_language}}
                 </div>
                 <!-- vote -->
                 <div class="vote">
-                    {{element.vote_average}}
+                    <!-- eseguo un ciclo v for per stampare le 5 stelle -->
+                    <i class="fa-solid fa-star" v-for="star in 5 " :key="star"></i>
+                   {{element.vote_average}}
+                    <!-- {{element.vote_average}} -->
                 </div>
                 <!-- overview -->
                 <div class="overview">
                     {{element.overview}}
                 </div>
-           </div>
+            </div>
         </div>
     
     </div>
@@ -76,7 +81,7 @@ export default {
     props: {
         // props che origina dal padre App.vue, passiamo un array 
         userFilm: Array, 
-        userSeries: Array
+        userSeries: Array,
     },
     methods:{
         flagsNation(nationality){
@@ -97,6 +102,12 @@ export default {
 
         imgCard(photo){
             return 'https:image.tmdb.org/t/p/w342' + photo
+        },
+
+        voteStar(vote){
+            let voters = vote
+            console.log('voti',voters)
+            return voters 
         }
 
     }
@@ -123,6 +134,9 @@ export default {
 
         .vote{
             margin: 10px 2px;
+            .vote i{
+                color: yellow;
+            }
         }
 
         .photo{
@@ -144,12 +158,13 @@ export default {
 
             .overview{
                 flex-grow: 1;
-                overflow: auto;
+                padding: 5px 2px;
             }
         }
 
         &:hover  .element-hover-container.flex{
             display: block;
+             overflow-y:auto;
         }
 
     }

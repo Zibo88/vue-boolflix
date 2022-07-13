@@ -41,31 +41,24 @@ export default {
 
   // eseguo la chiamata axios
       axios.get(this.urlFilms + word).then((response) =>{
-        console.log(response.data.results)
         // il risultato della chiamata lo assegno all'array vuoto
         this.arrayFilm = response.data.results
+        console.log('arrayfilm',  this.arrayFilm)
 
-        axios.get(this.urlSeries + word).then((response) => {
-        console.log(response.data.results)
-        this.arraySerie = response.data.results
+      })
+
+      // chiamata axios per le serie
+      axios.get(this.urlSeries + word).then((response) => {
+      // il risultato della chiamata lo assegno all'array vuoto
+      this.arraySerie = response.data.results
+      console.log('arrayserie', this.arraySerie)
         
       })
-
       
-      })
   },
     
-
-    
-
   }
-  
 
-
-
-    
-    
-	
 }
 
 </script>
