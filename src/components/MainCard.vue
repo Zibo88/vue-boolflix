@@ -22,9 +22,9 @@
                     <!-- {{element.original_language}} -->
                 </div>
                 <!-- vote -->
-                <div class="vote" >
+                <div class="vote" :class="voteStar(element.vote_average)" >
                     <i class="fa-solid fa-star" v-for="star in 5 " :key="star"></i>
-                    {{element.vote_average}}
+                   
                 </div>
                 
                 <div class="overview">
@@ -51,13 +51,14 @@
                 </h5>
                 <!-- flags -->
                 <div>
+                    <!-- aggiiungo la funzione flagsNation al :src e do come valore la lingua originale -->
                     <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
                 </div>
                 <!-- vote -->
-                <div class="vote">
+                <div class="vote" :class="voteStar(element.vote_average)">
                     <!-- eseguo un ciclo v for per stampare le 5 stelle -->
-                    <i class="fa-solid fa-star" v-for="star in 5 " :key="star"></i>
-                   {{element.vote_average}}
+                    <i class="fa-solid fa-star" v-for="star in 5 " :key="star"   ></i>
+                  
                     <!-- {{element.vote_average}} -->
                 </div>
                 <!-- overview -->
@@ -105,9 +106,9 @@ export default {
         },
 
         voteStar(vote){
-            let voters = vote
+            let voters = Math.ceil(vote/2) 
             console.log('voti',voters)
-            return voters 
+            return voters
         }
 
     }
