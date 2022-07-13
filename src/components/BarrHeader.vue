@@ -9,7 +9,8 @@
         <div class="search-barr">
              <!-- leggo il valore inserito dall'utente e lo salvo nella variabile userChoice -->
             <!-- tramite il @keyup.enter invio l'emit al padre App.vue (userfilm è l'ancoraggio che riporterò poi in app.vue mentre userChoice è la variabile di cui necessita per funzionare) -->
-            <input v-model="userChoice" @keyup.enter="$emit('userFilm', userChoice )" placeholder="cerca il tuo film" type="text">
+            <input v-model="userChoice"  placeholder="cerca il tuo film" type="text">
+            <button @click="$emit('userFilm', userChoice )">Cerca</button>
         </div>
        
     </div>
