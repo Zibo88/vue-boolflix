@@ -2,25 +2,66 @@
     <div class="card-container">
         <!-- cicliamo l'array che  ci arriva tramite la props -->
         <div class="card" v-for="element in userFilm" :key="element.id">
-           <h3 class="title">
-               {{element.title}}
-           </h3>
-           <h5 class="sub-title">
-               {{element.original_title}}
-           </h5>
-            <div>
-                <img class="photo" :src="imgCard(element.poster_path)">
-              
+           <!-- img -->
+            <div class="poster">
+                <img class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
            </div>
-           <div>
-                 <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
-               {{element.original_language}}
-           </div>
-          
-           <div class="vote">
-               {{element.vote_average}}
+           <div class="element-hover-container flex">
+                 <!-- title -->
+                <h3 class="title">
+                   Titolo: {{element.title}}
+                </h3>
+                <!-- sub-title -->
+                <h5 class="sub-title">
+                    Titolo originale: {{element.original_title}}
+                </h5>
+                <!-- flags -->
+                <div>
+                    <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
+                    {{element.original_language}}
+                </div>
+                <!-- vote -->
+                <div class="vote">
+                    {{element.vote_average}}
+                </div>
+                
+                <div class="overview">
+                    {{element.overview}}
+                </div>
            </div>
         </div>
+    <!-- serie -->
+        
+            <div class="card" v-for="element in userSeries" :key="element.id">
+           <!-- img -->
+            <div class="poster">
+                <img class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
+           </div>
+           <div class="element-hover-container flex">
+                 <!-- title -->
+                <h3 class="title">
+                   Titolo: {{element.name}}
+                </h3>
+                <!-- sub-title -->
+                <h5 class="sub-title">
+                    Titolo originale: {{element.original_name}}
+                </h5>
+                <!-- flags -->
+                <div>
+                    <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
+                    {{element.original_language}}
+                </div>
+                <!-- vote -->
+                <div class="vote">
+                    {{element.vote_average}}
+                </div>
+                <!-- overview -->
+                <div class="overview">
+                    {{element.overview}}
+                </div>
+           </div>
+        </div>
+    
     </div>
 </template>
 
@@ -34,7 +75,8 @@ export default {
     name: 'MainCard',
     props: {
         // props che origina dal padre App.vue, passiamo un array 
-        userFilm: Array 
+        userFilm: Array, 
+        userSeries: Array
     },
     methods:{
         flagsNation(nationality){
@@ -42,6 +84,12 @@ export default {
                 nationality = 'gb'
             }else if(nationality == 'ja'){
                 nationality = 'jp'
+            }else if (nationality == 'cs'){
+                nationality = 'cz'
+            }else if (nationality == 'ko'){
+                nationality = 'kr'
+            }else if (nationality == 'hi'){
+                nationality = 'in'
             }
             return 'https://countryflagsapi.com/svg/' + nationality
             
@@ -62,17 +110,19 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .card{
-        width: calc((100% / 5) - 8px);
-        margin: 4px;
-        background-color: lightcoral;
+        width: calc((100% / 5) - 16px);
+        margin: 8px;
+        position: relative;
         .title, .sub-title{
-            text-align: center;
             margin: 5px 2px;
         }
         .flags{
             width: 20px;
-            margin: 5px 2px;
+            margin: 10px 2px;
+        }
 
+        .vote{
+            margin: 10px 2px;
         }
 
         .photo{
@@ -80,6 +130,28 @@ export default {
             max-height: 300px;
             overflow: hidden;
         }
+
+        .element-hover-container.flex{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            background-color: black;
+            flex-direction: column;
+            display: none;
+
+            .overview{
+                flex-grow: 1;
+                overflow: auto;
+            }
+        }
+
+        &:hover  .element-hover-container.flex{
+            display: block;
+        }
+
     }
 }
 </style>

@@ -4,7 +4,7 @@
         <BarrHeader @userFilm='choiceFilm'/>
        <div>
          <!-- utilizzo il componente e lo passo al figlio MainCard tramite una props, come valore do l'array riempito tramite la chiamata axios -->
-          <MainCard :userFilm='arrayFilm'/>
+          <MainCard :userFilm='arrayFilm' :userSeries='arraySerie'/>
       </div>
     </div>
 
@@ -22,7 +22,6 @@ export default {
   name: 'App',
   data(){
     return{
-      // userChoice:'', 
         arrayFilm: [],
         urlFilms:'https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=',
         // fai un altro componenete
@@ -38,24 +37,24 @@ export default {
    
   methods:{
     choiceFilm(word){
-
       console.log('word',word)
+
   // eseguo la chiamata axios
       axios.get(this.urlFilms + word).then((response) =>{
         console.log(response.data.results)
         // il risultato della chiamata lo assegno all'array vuoto
         this.arrayFilm = response.data.results
 
+        axios.get(this.urlSeries + word).then((response) => {
+        console.log(response.data.results)
+        this.arraySerie = response.data.results
+        
+      })
+
       
       })
-    },
-    choiceSeries(serieWord){
-      console.log('serie',serieWord)
-      // axios.get(this.urlSeries + serieWord).then((response) => {
-      //   console.log(response.data.results)
-      //   this.arraySerie = response.data.results
-      // })
-    },
+  },
+    
 
     
 
