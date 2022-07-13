@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="app-container">
       
         <BarrHeader @userFilm='choiceFilm'/>
-       <div>
+       <div class="main">
          <!-- utilizzo il componente e lo passo al figlio MainCard tramite una props, come valore do l'array riempito tramite la chiamata axios -->
           <MainCard :userFilm='arrayFilm' :userSeries='arraySerie'/>
       </div>
@@ -64,6 +64,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import './style/common';
+
 
 </style>
 
