@@ -133,7 +133,7 @@ export default {
 @import '../style/variables';
 
 .card-container{
-    height: calc(100vh - 90px);
+    height: calc(100vh - 70px);
     overflow: hidden;
     .film-container.flex, .container-series.flex{
         width: 100vw;
