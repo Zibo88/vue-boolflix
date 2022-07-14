@@ -1,16 +1,20 @@
 <template>
     <div class="card-container">
-        <!-- cicliamo l'array che  ci arriva tramite la props -->
-        <h2>Film</h2>
+        
+        <h2 class="tipolgy">Film</h2>
         <div class="film-container flex">
+             <!-- cicliamo l'array che  ci arriva tramite la props userSeries-->
             <div class="card" v-for="element in userFilm" :key="element.id">
                 <!-- img -->
                 <div class="poster">
-                    <img class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
+                    <!-- se è presente element.poster_path stampalo/ l'img è data dal path + element.poster_path --> 
+                    <img v-if="element.poster_path" class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
+                    <!-- altrimenti stampa -->
+                    <img v-else class="photo" :src="'https://cdn1.vectorstock.com/i/1000x1000/21/35/404-error-page-or-file-not-found-icon-file-vector-21212135.jpgf'">
                 </div>
                 <div class="element-hover-container flex">
                     <!-- title -->
-                    <h3 class="title">
+                    <h3 class="title" >
                     Titolo: {{element.title}}
                     </h3>
                     <!-- sub-title -->
@@ -20,14 +24,14 @@
                 <!-- flags -->
                     <div>
                         <img class="flags" :src="flagsNation(element.original_language)" :alt="element.original_language">
-                        <!-- {{element.original_language}} -->
                     </div>
                     <!-- vote -->
+                     <!-- eseguo un ciclo v for per stampare le 5 stelle -->
+                        <!-- insericìsco un classe dinamica che mi permette di modificare l'icona in base al valore del voto. Star che è l'elemento ciclato è inferiore/uguale al voto ? la classe è solid, : se no è regular -->
                     <div class="vote" :class="voteStar(element.vote_average)">
                         <i class="fa-star" :class="(star <= voteStar(element.vote_average)) ? 'fa-solid' : 'fa-regular'" v-for="star in 5 " :key="star"></i>
-                    
                     </div>
-                    
+                    <!-- overview -->
                     <div class="overview">
                         {{element.overview}}
                     </div>
@@ -36,12 +40,14 @@
         </div>
         
             <!-- serie -->
-            <h2>Serie TV</h2>
+            <h2 class="tipolgy">Serie TV</h2>
             <div class="container-series flex">
+                <!-- eseguo un ciclo for nell'array passato tramite propos  -->
                 <div class="card" v-for="element in userSeries" :key="element.id">
                 <!-- img -->
                 <div class="poster">
-                    <img class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
+                    <img v-if="element.poster_path" class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
+                    <img v-else class="photo" :src="'https://cdn1.vectorstock.com/i/1000x1000/21/35/404-error-page-or-file-not-found-icon-file-vector-21212135.jpg'">
                 </div>
                 <div class="element-hover-container flex">
                     <!-- title -->
@@ -70,12 +76,8 @@
                     </div>
                 </div>    
             </div>
-            </div>
-            
-      
-    
+        </div>
     </div>
-   
    
 </template>
 
@@ -109,10 +111,12 @@ export default {
             
         },
 
+        // funzione che richiama il path delle foto e aggiunge il singolo poster_path
         imgCard(photo){
             return 'https:image.tmdb.org/t/p/w342' + photo
         },
 
+        // funzione che arrotonda il voto dato al film per eccesso
         voteStar(vote){
             let voters = Math.ceil(vote/2) 
             console.log('voti',voters)
@@ -124,17 +128,24 @@ export default {
 
 <style lang="scss" scoped>
 @import '../style/common';
+@import '../style/variables';
 
 .card-container{
+
     overflow: hidden;
     .film-container.flex, .container-series.flex{
         width: 100vw;
         overflow-x: auto;
     }
+    .tipolgy{
+        margin: 10px 10px;
+        font-size: 30px;
+        color: white;
+    }
     .card{
-   
         margin: 8px;
         position: relative;
+        
         .title, .sub-title{
             margin: 5px 2px;
         }
@@ -163,9 +174,11 @@ export default {
             top: 0;
             left: 0;
             color: white;
-            background-color: black;
+            background-color: rgba(black, 0.7);
+            opacity: 1;
             flex-direction: column;
             display: none;
+            border: 2px solid lightgray;
 
             .overview{
                 flex-grow: 1;

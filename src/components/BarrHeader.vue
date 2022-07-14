@@ -8,8 +8,8 @@
         
         <div class="search-barr">
              <!-- leggo il valore inserito dall'utente e lo salvo nella variabile userChoice -->
-            <!-- tramite il @keyup.enter invio l'emit al padre App.vue (userfilm è l'ancoraggio che riporterò poi in app.vue mentre userChoice è la variabile di cui necessita per funzionare) -->
-            <input v-model="userChoice"  placeholder="cerca il tuo film" type="text">
+            <!-- tramite il @click sul button invio l'emit al padre App.vue (userfilm è l'ancoraggio che riporterò poi in app.vue mentre userChoice è la variabile di cui necessita per funzionare) -->
+            <input class="search-input" v-model="userChoice"  placeholder="cerca il tuo film" type="text">
             <button @click="$emit('userFilm', userChoice )">Cerca</button>
         </div>
        
@@ -30,6 +30,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '../style/common';
+@import '../style/variables';
+
 .container-header{
     background-color: black;
     justify-content: space-between;
@@ -37,7 +39,22 @@ export default {
     padding: 10px;
 
     h1{
-        color: red;
+        color: $second_color;
+    }
+
+    .search-input{
+        margin-right: 10px;
+        padding: 5px;
+        border-radius: 16px;
+        border: 2px solid $second_color;
+        background-color: whitesmoke; 
+    }
+
+    button{
+        padding: 5px;
+        border-radius: 16px;
+        border: 2px solid $second_color;
+        cursor: pointer;
     }
 }
 
