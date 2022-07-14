@@ -40,10 +40,10 @@
         </div>
         
             <!-- serie -->
-            <h2 class="tipolgy">Serie TV</h2>
-            <div class="container-series flex">
-                <!-- eseguo un ciclo for nell'array passato tramite propos  -->
-                <div class="card" v-for="element in userSeries" :key="element.id">
+        <h2 class="tipolgy">Serie TV</h2>
+        <div class="container-series flex">
+            <!-- eseguo un ciclo for nell'array passato tramite propos  -->
+            <div class="card" v-for="element in userSeries" :key="element.id">
                 <!-- img -->
                 <div class="poster">
                     <img v-if="element.poster_path" class="photo" :src="imgCard(element.poster_path)" :alt="element.poster_path" >
@@ -106,6 +106,8 @@ export default {
                 nationality = 'kr'
             }else if (nationality == 'hi'){
                 nationality = 'in'
+            }else if (nationality == 'zh'){
+                nationality = 'cn'
             }
             return 'https://countryflagsapi.com/svg/' + nationality
             
@@ -131,14 +133,14 @@ export default {
 @import '../style/variables';
 
 .card-container{
-
+    height: calc(100vh - 90px);
     overflow: hidden;
     .film-container.flex, .container-series.flex{
         width: 100vw;
         overflow-x: auto;
     }
     .tipolgy{
-        margin: 10px 10px;
+        margin-left: 10px;
         font-size: 30px;
         color: white;
     }
@@ -162,8 +164,8 @@ export default {
         }
 
         .poster{
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             overflow: hidden;
         }
 

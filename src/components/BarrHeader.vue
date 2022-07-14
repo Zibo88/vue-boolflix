@@ -37,7 +37,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-
+    height: 90px;
     h1{
         color: $second_color;
     }

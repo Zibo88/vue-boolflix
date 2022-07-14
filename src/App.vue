@@ -67,8 +67,5 @@ export default {
 <style lang="scss">
 @import './style/common';
 
-.app-container{
-  height: 100vh;
-}
 </style>
 
